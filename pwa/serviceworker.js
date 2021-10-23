@@ -3,7 +3,9 @@ var staticCacheName = "pwa";
 const filesToCache = [
     './',
     './index.html',
-    './main.js'
+    './main.js',
+    '../images/tick.png',
+    '../images/close.png'
 ];
 
 self.addEventListener("install", function (e) {
