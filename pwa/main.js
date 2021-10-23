@@ -49,15 +49,21 @@ window.addEventListener('load', () => {
     const input = document.getElementById('push-data');
     const btn = document.getElementById('push');
     btn.addEventListener('click', async () => {
-        await fetch(`${apiServer}/api/push/send`, {
-            method: "POST",
-            body: JSON.stringify({
-                text: input.value
-            }),
-            headers: {
-                "content-type": "application/json"
+        setTimeout(async () => {
+            try {
+                await fetch(`${apiServer}/api/push/send`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        text: input.value
+                    }),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                });
+            } catch (e) {
+                alert(e)
             }
-        });
+        }, 1000)
     })
 });
 
