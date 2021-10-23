@@ -44,10 +44,10 @@ const createNotificationService = () => ({
 
 const notificationService = createNotificationService();
 
-setTimeout(() => {
+/*setTimeout(() => {
     notificationService.displayNotification({
         title: 'Hello world!',
         body: 'Here is a notification body!',
     });
-}, 500);
+}, 500);*/
 

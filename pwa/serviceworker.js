@@ -41,3 +41,51 @@ self.addEventListener('notificationclick', (e) => {
         notification.close();
     }
 });
+
+const createNotificationService = () => ({
+    config: {
+        notificationOptions: {}
+
+    },
+    isPermissionGranted() {
+        return Notification.permission === 'granted'
+    },
+    displayNotification(e, { body, title, data }) {
+        const options = {
+            body,
+            icon: '../images/house.png',
+            vibrate: [100, 50, 100],
+            data: {
+                ...data,
+                dateOfArrival: Date.now(),
+                primaryKey: 1,
+            },
+            actions: [
+                {
+                    action: 'explore',
+                    title: 'Open this link',
+                    icon: '../images/tick.png'
+                },
+                {
+                    action: 'close',
+                    title: 'Close',
+                    icon: '../images/close.png'
+                }
+            ]
+        };
+        e.waitUntil(
+            self.registration.showNotification(title, options)
+        )
+    }
+});
+
+const notificationService = createNotificationService();
+
+self.addEventListener('push', (e) => {
+    const body = e.data ? JSON.parse(e.data.text()) : 'No body';
+    console.log('push event', body);
+    notificationService.displayNotification(e, {
+        title: 'Hello from push!',
+        body: body.text
+    });
+});
