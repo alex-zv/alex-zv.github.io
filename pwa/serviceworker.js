@@ -65,7 +65,7 @@ const createNotificationService = () => ({
             actions: [
                 {
                     action: 'explore',
-                    title: 'Open this link',
+                    title: 'Action open',
                     icon: '../images/tick.png'
                 },
                 {
@@ -91,10 +91,3 @@ self.addEventListener('push', (e) => {
         body: body
     });
 });
-
-setTimeout(() => {
-    notificationService.displayNotification(e, {
-        title: 'Test push',
-        body: 'test push body'
-    });
-}, 5000);
