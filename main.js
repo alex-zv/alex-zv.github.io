@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
     btn.addEventListener('click', async () => {
         setTimeout(async () => {
             try {
-                await fetch(`${apiServer}/push/send`, {
+                await fetch(`${apiServer}/push/send11`, {
                     method: "POST",
                     body: JSON.stringify({
                         text: input.value
@@ -61,7 +61,8 @@ window.addEventListener('load', () => {
                     }
                 });
             } catch (e) {
-                alert(e)
+                alert(e?.message)
+                alert(e?.stack)
             }
         }, 1000)
     })
