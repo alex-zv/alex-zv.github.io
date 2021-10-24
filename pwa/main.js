@@ -1,4 +1,4 @@
-const apiServer = 'http://192.168.50.186:3030';
+const apiServer = 'http://localhost:3030/api';
 function urlB64ToUint8Array(base64String) {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
@@ -29,7 +29,7 @@ const regSw = async () => {
                 applicationServerKey: urlB64ToUint8Array(publicVapidKey)
             });
 
-            await fetch(`${apiServer}/api/push/subscribe`, {
+            await fetch(`${apiServer}/push/subscribe`, {
                 method: "POST",
                 body: JSON.stringify(subscription),
                 headers: {
@@ -45,13 +45,13 @@ const regSw = async () => {
 };
 
 window.addEventListener('load', () => {
-    regSw()
+    regSw();
     const input = document.getElementById('push-data');
     const btn = document.getElementById('push');
     btn.addEventListener('click', async () => {
         setTimeout(async () => {
             try {
-                await fetch(`${apiServer}/api/push/send`, {
+                await fetch(`${apiServer}/push/send`, {
                     method: "POST",
                     body: JSON.stringify({
                         text: input.value
@@ -65,10 +65,5 @@ window.addEventListener('load', () => {
             }
         }, 1000)
     })
-    document.getElementById('local-push', () => {
-        document.push()
-    })
 });
-
-
 
