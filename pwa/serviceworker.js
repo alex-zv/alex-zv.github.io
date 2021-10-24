@@ -84,10 +84,17 @@ const createNotificationService = () => ({
 const notificationService = createNotificationService();
 
 self.addEventListener('push', (e) => {
-    const body = e.data ? JSON.parse(e.data.text()) : 'No body';
+    const body = e.data ? e.data.text() : 'No body';
     console.log('push event', body);
     notificationService.displayNotification(e, {
         title: 'Hello from push!',
-        body: body.text
+        body: body
     });
 });
+
+setTimeout(() => {
+    notificationService.displayNotification(e, {
+        title: 'Test push',
+        body: 'test push body'
+    });
+}, 5000);
